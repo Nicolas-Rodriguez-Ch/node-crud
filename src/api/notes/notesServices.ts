@@ -1,6 +1,6 @@
 import { Note } from "../../models/note";
 
-let currentId = 0;
+let currentId = 1;
 
 const notes: Note[] = [];
 

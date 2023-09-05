@@ -19,3 +19,17 @@ export const getAllNotesController = async (
     next(error);
   }
 };
+
+export const createNoteController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { title, content } = req.body;
+    const note = await createNote(title, content);
+    res.status(201).json({ message: "Note created!", data: note });
+  } catch (error) {
+    next(error);
+  }
+};
