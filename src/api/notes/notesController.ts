@@ -50,3 +50,21 @@ export const getNoteByIdController = async (
     next(error);
   }
 };
+
+export const updateNoteController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id } = req.params;
+    const { title, content } = req.body;
+    const note = await updateNote(parseInt(id, 10), title, content);
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+    res.status(200).json({ message: "Note updated", data: note });
+  } catch (error) {
+    next(error);
+  }
+};
