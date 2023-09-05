@@ -33,3 +33,20 @@ export const createNoteController = async (
     next(error);
   }
 };
+
+export const getNoteByIdController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id } = req.params;
+    const note = await getNoteById(parseInt(id, 10));
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+    res.status(200).json({ message: "Note found!", data: note });
+  } catch (error) {
+    next(error);
+  }
+};
